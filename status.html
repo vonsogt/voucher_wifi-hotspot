@@ -3,8 +3,7 @@
 
 <head>
     $(if refresh-timeout)
-        <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
-    $(endif)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)"> $(endif)
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -21,7 +20,7 @@
     <link href="css/custom.css" rel="stylesheet" />
 </head>
 
-<body $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
+<body $(if advert-pending=='yes' ) onLoad="openAdvert()" $(endif)>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
@@ -94,14 +93,10 @@
                                         result = ($(limit - bytes - total) / 1000000).toFixed(2)
                                         document.write(result)
                                     </script>
-                                    MiB 
-                                    $(else) 
-                                    Unlimited 
-                                    $(endif)
+                                    MiB $(else) Unlimited $(endif)
                                 </td>
                             </tr>
-                            $(endif)
-                            $(if refresh-timeout)
+                            $(endif) $(if refresh-timeout)
                             <tr>
                                 <th scope="row">Status refresh</th>
                                 <td>$(refresh-timeout)</td>
@@ -114,8 +109,7 @@
                         <!-- user manager link. if user manager resides on other router, replace $(hostname) by its address
                         <button onclick="document.location='http://$(hostname)/user?subs='; return false;">status</button>
                         <!-- end of user manager link -->
-                        <input type="submit" value="Keluar">
-                        $(endif)
+                        <input type="submit" value="Keluar"> $(endif)
                     </form>
                 </div>
 
@@ -127,7 +121,7 @@
         <div class="container">
             <p class="m-0 text-center text-white">
                 &copy; Voucher WiFi 2021 by
-                <a href="">SkyNet</a>
+                <a href="">Villamas</a>
             </p>
         </div>
     </footer>
@@ -138,22 +132,25 @@
 
     <!-- RouterOS Script -->
     <script>
-
-    $(if advert-pending == 'yes')
+        $(
+            if advert - pending == 'yes')
         var popup = '';
+
         function focusAdvert() {
-        if (window.focus) popup.focus();
+            if (window.focus) popup.focus();
         }
+
         function openAdvert() {
-        popup = open('$(link-advert)', 'hotspot_advert', '');
-        setTimeout("focusAdvert()", 1000);
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
         }
-    $(endif)
+        $(endif)
+
         function openLogout() {
-        if (window.name != 'hotspot_status') return true;
+            if (window.name != 'hotspot_status') return true;
             open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
-        window.close();
-        return false;
+            window.close();
+            return false;
         }
     </script>
 </body>
